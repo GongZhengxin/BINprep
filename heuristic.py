@@ -29,20 +29,20 @@ def infotodict(seqinfo):
     for idx, s in enumerate(seqinfo):
         if (s.dim4 == 256) and ('bold_100x100_s3_2x2x2_static_256' in s.protocol_name):
             info[func_object].append(s.series_id)
-        elif ('t1_mprage_sag_1x1x1_p2_64ch' in s.protocol_name):
+        if ('t1_mprage_sag_1x1x1_p2_64ch' in s.protocol_name):
             info[t1w].append(s.series_id)
-        elif (s.dim4 == 240) and ('bold_100x100_s3_2x2x2_RS_240' in s.protocol_name):
+        if (s.dim4 == 240) and ('bold_100x100_s3_2x2x2_RS_240' in s.protocol_name):
             info[func_rest].append(s.series_id)
-        elif (s.dim4 == 241) and ('bold_100x100_s3_2x2x2_static_test_241' in s.protocol_name):
+        if (s.dim4 == 241) and ('bold_100x100_s3_2x2x2_static_test_241' in s.protocol_name):
             info[func_fixcolor].append(s.series_id)
-        elif (s.dim4 == 150) and ('bold_100x100_s3_2x2x2_retino_150' in s.protocol_name):
-            info[func_retinotopy] = [s.series_id]
-        elif (s.dim4 == 154) and ('bold_100x100_s3_2x2x2_cat_154' in s.protocol_name):
-            info[func_category154] = [s.series_id]
-        elif (s.dim4 == 150) and ('bold_100x100_s3_2x2x2_cat_150' in s.protocol_name):
+        if (s.dim4 == 150) and ('retino_150' in s.protocol_name):
+            info[func_retinotopy].append(s.series_id)
+        if (s.dim4 == 154) and ('bold_100x100_s3_2x2x2_cat_154' in s.protocol_name):
+            info[func_category154].append(s.series_id)
+        if (s.dim4 == 150) and ('bold_100x100_s3_2x2x2_cat_150' in s.protocol_name):
             info[func_category].append(s.series_id)
-        elif (s.dim3 == 144) and ('field_mapping_2x2x2' in s.protocol_name):
+        if (s.dim3 == 144) and ('field_mapping_2x2x2' in s.protocol_name):
             info[fmap_mag].append(s.series_id)
-        elif (s.dim3 == 72) and ('field_mapping_2x2x2' in s.protocol_name):
+        if (s.dim3 == 72) and ('field_mapping_2x2x2' in s.protocol_name):
             info[fmap_phase].append(s.series_id)
     return info
