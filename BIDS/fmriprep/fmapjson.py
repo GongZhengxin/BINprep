@@ -22,7 +22,8 @@ import json
 # !!!======manually set======
 # baisc infomation about dataset
 bids_fold = '/nfs/m1/BrainImageNet/fMRIData/rawdata'
-subjects = ['core{:02d}'.format(i+1) for i in range(10)]
+#subjects = ['core{:02d}'.format(i+1) for i in range(10)]
+subjects = ['core02']
 
 # ===========================
 

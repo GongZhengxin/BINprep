@@ -33,10 +33,10 @@ def runcmd(command, verbose=0):
         print("success:",ret)
     else:
         print("error:",ret)
-
+# %%
 # get subject & session information 
 # check your sessinfo.csv for addapting
-with open('sessinfo.tsv','r') as info:
+with open('new_session_info.tsv','r') as info:
     information = [line.split('\t') for line in info.readlines()]
 header = information[0]
 content = information[1:]
@@ -114,12 +114,12 @@ for file in tqdm(targzFiles[:]):
         # Third, generate .heudeconv fold, 
         # !!! this should compitable to sub folder & sess folder name
         # $$$$ docker command line
-        # base_fold = "/home/gongzhengxin/workingdir/BrainObjectNet"
-        # dcom_files = "/base/"+dicom_folder+"/sub-{subject}/sess-{session}/*.IMA"
-        # nifi_fold = "/base/"+ nifiti_folder
-        # subID, sessID = session_dict[name]['folder'].replace("sub-", ''), session_foldername.replace("sess-", '')
-        # gen_heu_cmd = "docker run --rm -i -v {:s}:/base nipy/heudiconv:latest -d {:s} -o {:s} -f convertall -s {:s} -ss {:s} -c none --overwrite".format(base_fold,
-        #         dcom_files, nifi_fold, subID, sessID)
+#        base_fold = "/nfs/m1/BrainImageNet/fMRIData"
+#        dcom_files = "/base/"+dicom_folder+"/sub-{subject}/sess-{session}/*.IMA"
+#        nifi_fold = "/base/"+ nifiti_folder
+#        subID, sessID = session_dict[name]['folder'].replace("sub-", ''), session_foldername.replace("sess-", '')
+#        gen_heu_cmd = "docker run --rm -i -v {:s}:/base nipy/heudiconv:latest -d {:s} -o {:s} -f convertall -s {:s} -ss {:s} -c none --overwrite".format(base_fold,
+#                dcom_files, nifi_fold, subID, sessID)
         
         # !!! $$$$ local command line
         base_fold = "/nfs/m1/BrainImageNet/fMRIData"
@@ -128,23 +128,23 @@ for file in tqdm(targzFiles[:]):
         subID, sessID = session_dict[name]['folder'].replace("sub-", ''), session_foldername.replace("sess-", '')
         gen_heu_cmd = "base=\"{:s}\"; heudiconv -d {:s} -o {:s} -f convertall -s {:s} -ss {:s} -c none --overwrite".format(base_fold, dcom_files, nifi_fold, subID, sessID)
         
-        runcmd(gen_heu_cmd)
+        #runcmd(gen_heu_cmd)
         
         # Last, heuristic.py should be stored at the Nifitifolder/code
         # !!! $$$$ docker command line
         # heuristicpy = "/"+nifiti_folder+"/code/heuristic.py"
         # decom2bids_cmd1 = "docker run --rm -i -v {:s}:/base nipy/heudiconv:latest -d {:s} -o {:s}".format(base_fold, dcom_files, nifi_fold)
         # decom2bids_cmd2 = " -f /base{:s} -s {:s} -ss {:s} -c dcm2niix -b --overwrite".format(heuristicpy, subID, sessID)
-        # decom2bid_cmd = decom2bids_cmd1 + decom2bids_cmd2
+        # decom2bids_cmd = decom2bids_cmd1 + decom2bids_cmd2
       
         # !!! $$$$ local command lin
         heuristicpy = "/"+nifiti_folder+"/code/heuristic.py"
         decom2bids_cmd1 = "base=\"{:s}\"; heudiconv -d {:s} -o {:s}".format(base_fold, dcom_files, nifi_fold)
         decom2bids_cmd2 = " -f $base{:s} -s {:s} -ss {:s} -c dcm2niix -b --overwrite".format(heuristicpy, subID, sessID)
-        decom2bid_cmd = decom2bids_cmd1 + decom2bids_cmd2
+        decom2bids_cmd = decom2bids_cmd1 + decom2bids_cmd2
         
-        runcmd(decom2bid_cmd)
-        
+#        runcmd(decom2bids_cmd)
+#        
     else:
         print('{:s} already existed!'.format(trgname))
 
