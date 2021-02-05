@@ -1,3 +1,4 @@
+# %%
 import os
 import subprocess
 from os.path import join as pjoin
@@ -29,9 +30,11 @@ for subject in subject_folds:
                      if all([ __ in _ for __ in file_flag])]
             func_files.extend([pjoin(input_path,subject,session,modality,file) for file in \
                   current_files])
-
+# %%
 # run cml
 ciftify_work_dir = '/nfs/m1/BrainImageNet/fMRIData/derivatives/ciftify'
+ev_cmd = 'export CIFTI_WORKDIR=' + ciftify_work_dir
+subprocess.call(ev_cmd, shell=True)
 cmd_pre = 'ciftify_subject_fmri --surf-reg MSMSulc --ciftify-work-dir ' + ciftify_work_dir + ' '
 for func_file in func_files[1:2]:
     out_name = os.path.basename(func_file).split('_')
@@ -55,3 +58,5 @@ for func_file in func_files[1:2]:
 
 
 
+
+# %%
