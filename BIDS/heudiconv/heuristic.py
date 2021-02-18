@@ -24,7 +24,8 @@ def infotodict(seqinfo):
     fmap_phase = create_key('sub-{subject}/{session}/fmap/sub-{subject}_{session}_run-{item:02d}_phasediff')
     
 
-    info = {t1w: [], func_rest: [], func_object: [], func_fixcolor: [], func_category: [], func_retinotopy: [], func_category154: [], fmap_mag: [], fmap_phase: []}
+    info = {t1w: [], func_rest: [], func_object: [], func_fixcolor: [], func_category: [], 
+            func_retinotopy: [], func_category154: [], fmap_mag: [], fmap_phase: []}
     
     for idx, s in enumerate(seqinfo):
         if (s.dim4 == 256) and ('bold_100x100_s3_2x2x2_static_256' in s.protocol_name):
