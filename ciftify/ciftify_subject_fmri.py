@@ -46,17 +46,3 @@ for func_file in func_files[1:2]:
     subprocess.call(cmd, shell=True)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-# %%
